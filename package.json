@@ -15,7 +15,9 @@
         "write-prettier": "prettier --write .",
         "test": "jest --verbose",
         "test-update": "jest --verbose --updateSnapshot",
-        "update_deps": "node update_deps.mjs"
+        "update_deps": "node update_deps.mjs",
+        "link-local": "node scripts/link-local.js",
+        "unlink-local": "node scripts/unlink-local.js"
     },
     "dependencies": {
         "@babel/core": "^7.26.10",

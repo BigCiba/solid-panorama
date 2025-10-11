@@ -37,6 +37,51 @@ declare interface PanelAttributes<T extends PanelBase = Panel> {
     visible?: boolean;
     checked?: boolean;
 
+    // CSS Layout Properties
+    width?: "fit-children" | `fill-parent-flow(${number})` | `height-percentage(${number}%)` | `${number}px` | `${number}%` | string;
+    height?: "fit-children" | `fill-parent-flow(${number})` | `width-percentage(${number}%)` | `${number}px` | `${number}%` | string;
+    flowChildren?: "right" | "right-wrap" | "down" | "down-wrap" | "left" | "left-wrap" | "up" | "up-wrap" | "none";
+    verticalAlign?: "top" | "bottom" | "middle" | "center";
+    horizontalAlign?: "left" | "right" | "middle" | "center";
+    align?: "left top" | "left center" | "left bottom" | "center top" | "center center" | "center bottom" | "right top" | "right center" | "right bottom";
+
+    // Enhanced Tooltip Properties
+    tooltip?: string | { title?: string; text?: string; name?: string; };
+    titleTooltip?: { title: string; text: string; };
+    customTooltip?: { name: string; } & Record<string, any>;
+    tooltipPosition?: string;
+
+    // Margin Properties
+    margin?: string;
+    marginTop?: string;
+    marginLeft?: string;
+    marginBottom?: string;
+    marginRight?: string;
+
+    // Padding Properties
+    padding?: string;
+    paddingTop?: string;
+    paddingLeft?: string;
+    paddingBottom?: string;
+    paddingRight?: string;
+
+    // Background Properties
+    backgroundImage?: string;
+    backgroundSize?: string;
+    backgroundColor?: string;
+    washColor?: string;
+
+    // Visual Properties
+    opacity?: string;
+
+    // Position Properties
+    x?: string;
+    y?: string;
+    zIndex?: number;
+
+    // Scroll Properties  
+    scroll?: "x" | "y" | "both" | EOM_PanelScroll | [EOM_PanelScroll, EOM_PanelScroll];
+
     ref?: T | ((element: T) => void);
 
     // tooltip
@@ -267,7 +312,7 @@ declare interface CountdownAttributes extends PanelAttributes<CountdownPanel> {
 }
 
 declare interface TextButtonAttributes
-    extends LabelLikeAttributes<TextButton> {}
+    extends LabelLikeAttributes<TextButton> { }
 
 declare interface ToggleButtonAttributes
     extends LabelLikeAttributes<ToggleButton> {
@@ -367,8 +412,8 @@ declare interface DOTAHUDOverlayMapAttributes
     mapscroll?: boolean;
     /** @default false */
     fixedoffsetenabled?: boolean;
-    fixedOffset?: { x: number; y: number };
-    fixedBackgroundTexturePosition?: { size: number; x: number; y: number };
+    fixedOffset?: { x: number; y: number; };
+    fixedBackgroundTexturePosition?: { size: number; x: number; y: number; };
 }
 
 declare interface HTMLAttributes extends PanelAttributes<HTML> {
@@ -380,4 +425,4 @@ declare interface CustomLayoutPanelAttributes extends PanelAttributes {
     layout: string;
 }
 
-declare interface DOTAPortraitAttributes extends PanelAttributes {}
+declare interface DOTAPortraitAttributes extends PanelAttributes { }

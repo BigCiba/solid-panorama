@@ -19,14 +19,10 @@ import {
 
 // Forward Solid control flow
 export {
-    For,
-    Show,
+    ErrorBoundary, For, Index, Match, Show,
     Suspense,
     SuspenseList,
-    Switch,
-    Match,
-    Index,
-    ErrorBoundary
+    Switch
 } from 'solid-js';
 
 const hasOwn = Object.prototype.hasOwnProperty;
@@ -255,6 +251,81 @@ export const {
             setCustomTooltip(node, value);
         } else if (name === 'custom_tooltip_params') {
             setCustomTooltipParams(node, value);
+        } else if (
+            // CSS Layout Properties
+            name === 'width' ||
+            name === 'height' ||
+            name === 'flowChildren' ||
+            name === 'verticalAlign' ||
+            name === 'horizontalAlign' ||
+            name === 'align' ||
+            // Margin Properties
+            name === 'margin' ||
+            name === 'marginTop' ||
+            name === 'marginLeft' ||
+            name === 'marginBottom' ||
+            name === 'marginRight' ||
+            // Padding Properties
+            name === 'padding' ||
+            name === 'paddingTop' ||
+            name === 'paddingLeft' ||
+            name === 'paddingBottom' ||
+            name === 'paddingRight' ||
+            // Background Properties
+            name === 'backgroundImage' ||
+            name === 'backgroundSize' ||
+            name === 'backgroundColor' ||
+            name === 'washColor' ||
+            // Visual Properties
+            name === 'opacity' ||
+            // Position Properties
+            name === 'x' ||
+            name === 'y' ||
+            name === 'zIndex' ||
+            // Scroll Properties
+            name === 'scroll'
+        ) {
+            // Apply CSS properties directly to style
+            applyStyles(node, { [name]: value }, prev ? { [name]: prev } : undefined);
+        } else if (name === 'tooltip') {
+            // Handle tooltip property with auto-detection
+            if (typeof value === 'string') {
+                setTooltipText(node, value);
+            } else if (value && typeof value === 'object') {
+                if (value.name) {
+                    // Custom tooltip
+                    setCustomTooltip(node, [value.name, value.name]);
+                    if (Object.keys(value).length > 1) {
+                        const params = { ...value };
+                        delete params.name;
+                        setCustomTooltipParams(node, params);
+                    }
+                } else if (value.title || value.text) {
+                    // Title tooltip - combine title and text
+                    const tooltipText = value.title ? (value.text ? `${value.title}\n${value.text}` : value.title) : value.text;
+                    setTooltipText(node, tooltipText);
+                }
+            }
+        } else if (name === 'titleTooltip') {
+            // Handle title tooltip
+            if (value && typeof value === 'object' && (value.title || value.text)) {
+                const tooltipText = value.title ? (value.text ? `${value.title}\n${value.text}` : value.title) : value.text;
+                setTooltipText(node, tooltipText);
+            }
+        } else if (name === 'customTooltip') {
+            // Handle custom tooltip
+            if (value && typeof value === 'object' && value.name) {
+                setCustomTooltip(node, [value.name, value.name]);
+                const params = { ...value };
+                delete params.name;
+                if (Object.keys(params).length > 0) {
+                    setCustomTooltipParams(node, params);
+                }
+            }
+        } else if (name === 'tooltipPosition') {
+            // Handle tooltip position - this might need special implementation
+            // For now, we'll set it as an attribute
+            node.SetAttributeString('tooltip-position', String(value));
         } else if (
             name === 'onDragStart' ||
             name === 'onDragEnd' ||

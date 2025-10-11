@@ -1,0 +1,25 @@
+{
+	"name": "solid-panorama-test-project",
+	"version": "1.0.0",
+	"description": "Test project for solid-panorama local development",
+	"scripts": {
+		"build": "babel src --out-dir dist --extensions .ts,.tsx",
+		"dev": "babel src --out-dir dist --extensions .ts,.tsx --watch"
+	},
+	"dependencies": {
+		"solid-js": "^1.9.5",
+		"@moddota/panorama-types": "^1.35.0"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.26.9",
+		"@babel/core": "^7.26.10",
+		"@babel/preset-env": "^7.26.9",
+		"@babel/preset-typescript": "^7.26.0",
+		"@babel/plugin-transform-typescript": "^7.26.0",
+		"solid-panorama-runtime": "file:../dist/runtime",
+		"babel-plugin-jsx-panorama-expressions": "file:../dist/babel-plugin-jsx-panorama-expressions",
+		"babel-preset-solid-panorama": "file:../dist/babel-preset-solid-panorama",
+		"solid-panorama-all-in-jsx": "file:../dist/panorama-all-in-jsx",
+		"solid-panorama-polyfill": "file:../dist/solid-panorama-polyfill"
+	}
+}
