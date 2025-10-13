@@ -17,7 +17,10 @@
         "test-update": "jest --verbose --updateSnapshot",
         "update_deps": "node update_deps.mjs",
         "link-local": "node scripts/link-local.js",
-        "unlink-local": "node scripts/unlink-local.js"
+        "unlink-local": "node scripts/unlink-local.js",
+        "publish:jsx": "node scripts/publish-jsx.js",
+        "publish:jsx:minor": "node scripts/publish-jsx.js minor",
+        "publish:jsx:major": "node scripts/publish-jsx.js major"
     },
     "dependencies": {
         "@babel/core": "^7.26.10",
