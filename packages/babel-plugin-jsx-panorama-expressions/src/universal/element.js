@@ -1,18 +1,18 @@
 import * as t from '@babel/types';
+import { CustomProperties } from '../props';
+import { getElementProps } from '../shared/component';
+import { transformNode } from '../shared/transform';
 import {
-    getTagName,
-    isDynamic,
-    registerImportMethod,
-    filterChildren,
+    canNativeSpread,
     checkLength,
+    convertJSXIdentifier,
+    filterChildren,
     getConfig,
     getRendererConfig,
-    convertJSXIdentifier,
-    canNativeSpread
+    getTagName,
+    isDynamic,
+    registerImportMethod
 } from '../shared/utils';
-import { transformNode } from '../shared/transform';
-import { getElementProps } from '../shared/component';
-import { CustomProperties } from '../props';
 
 export function transformElement(path, info) {
     let tagName = getTagName(path.node),
@@ -238,6 +238,7 @@ function transformAttributes(path, results) {
                         !t.isBooleanLiteral(value.expression) &&
                         !t.isNumericLiteral(value.expression)
                     ) {
+                        // } else {
                         results.exprs.push(
                             t.expressionStatement(
                                 setAttr(attribute, elem, key, value.expression)
@@ -307,9 +308,8 @@ function transformChildren(path, results) {
     childNodes.forEach((child, index) => {
         if (!child) return;
         if (child.tagName && child.renderer !== 'universal') {
-            throw new Error(`<${
-                child.tagName
-            }> is not supported in <${getTagName(path.node)}>.
+            throw new Error(`<${child.tagName
+                }> is not supported in <${getTagName(path.node)}>.
         Wrap the usage with a component that would render this element, eg. Canvas`);
         }
         if (child.id) {
@@ -420,9 +420,9 @@ function processSpreads(
                     checkMember: true
                 }) && (dynamicSpread = true)
                     ? t.isCallExpression(node.argument) &&
-                      !node.argument.arguments.length &&
-                      !t.isCallExpression(node.argument.callee) &&
-                      !t.isMemberExpression(node.argument.callee)
+                        !node.argument.arguments.length &&
+                        !t.isCallExpression(node.argument.callee) &&
+                        !t.isMemberExpression(node.argument.callee)
                         ? node.argument.callee
                         : t.arrowFunctionExpression([], node.argument)
                     : node.argument
@@ -445,12 +445,12 @@ function processSpreads(
                 const id = convertJSXIdentifier(node.name);
                 let expr =
                     wrapConditionals &&
-                    (t.isLogicalExpression(node.value.expression) ||
-                        t.isConditionalExpression(node.value.expression))
+                        (t.isLogicalExpression(node.value.expression) ||
+                            t.isConditionalExpression(node.value.expression))
                         ? transformCondition(
-                              attribute.get('value').get('expression'),
-                              true
-                          )
+                            attribute.get('value').get('expression'),
+                            true
+                        )
                         : t.arrowFunctionExpression([], node.value.expression);
                 runningObject.push(
                     t.objectMethod(
@@ -482,9 +482,9 @@ function processSpreads(
         spreadArgs.length === 1 && !dynamicSpread
             ? spreadArgs[0]
             : t.callExpression(
-                  registerImportMethod(path, 'mergeProps'),
-                  spreadArgs
-              );
+                registerImportMethod(path, 'mergeProps'),
+                spreadArgs
+            );
 
     return [
         filteredAttributes,

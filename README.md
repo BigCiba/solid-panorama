@@ -92,6 +92,95 @@ Both `class` and `className` properties are supported, and since solid.js provid
 >foo</Button>
 ```
 
+## CSS Properties
+
+You can now use CSS properties directly as JSX attributes without wrapping them in a `style` object. These properties will be automatically converted to appropriate Panorama API calls.
+
+### Supported CSS Properties
+
+**Layout Properties:**
+- `width`, `height` - Element dimensions
+- `flowChildren` - Child layout direction (`down`, `right`, etc.)
+- `verticalAlign`, `horizontalAlign`, `align` - Element alignment
+
+**Spacing Properties:**
+- `margin`, `marginTop`, `marginLeft`, `marginBottom`, `marginRight` - Element margins
+- `padding`, `paddingTop`, `paddingLeft`, `paddingBottom`, `paddingRight` - Element padding
+
+**Background Properties:**
+- `backgroundImage` - Background image path
+- `backgroundSize` - Background image sizing
+- `backgroundColor` - Background color
+- `washColor` - Wash color overlay
+
+**Position Properties:**
+- `x`, `y` - Element position
+- `zIndex` - Z-order layering
+
+**Visual Properties:**
+- `opacity` - Element transparency
+- `scroll` - Scroll behavior
+
+**Enhanced Tooltip Properties:**
+- `tooltip` - Simple text tooltip or complex tooltip object
+- `titleTooltip` - Title-style tooltip with title and text
+- `customTooltip` - Custom XML layout tooltip
+- `tooltipPosition` - Tooltip positioning
+
+### Usage Examples
+
+```jsx
+// Direct CSS properties
+<Panel 
+    width="fit-children"
+    height="200px"
+    flowChildren="down"
+    margin="10px"
+    backgroundImage="file://{images}/bg.png"
+    opacity="0.8"
+/>
+
+// Enhanced tooltip with title and text
+<Button 
+    tooltip={{ title: "Button Title", text: "Button description" }}
+    width="100px"
+    height="40px"
+>
+    Click Me
+</Button>
+
+// Custom tooltip with XML layout
+<Panel 
+    customTooltip={{ name: "ItemTooltip", param1: "value1" }}
+    backgroundImage="file://{images}/item_bg.png"
+/>
+
+// Still compatible with style object
+<Panel width="100px" style={{ color: "white" }}>
+    Content
+</Panel>
+```
+
+### Migration from style object
+
+```jsx
+// Old way with style object
+<Panel style={{
+    width: "200px",
+    height: "100px",
+    flowChildren: "down",
+    margin: "10px"
+}} />
+
+// New way with direct CSS properties
+<Panel 
+    width="200px"
+    height="100px"
+    flowChildren="down"
+    margin="10px"
+/>
+```
+
 ## Event
 
 Not support bubble event.

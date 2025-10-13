@@ -10,6 +10,11 @@ import {
 } from 'solid-js';
 import { createRenderer } from 'solid-js/universal';
 import { StyleKeyAutoConvertToPixelList } from './config';
+import {
+    handleCSSTooltipProperty,
+    isCSSScrollProperty,
+    isCSSStyleProperty
+} from './css-properties';
 import { setDragEvent } from './event';
 import {
     setCustomTooltip,
@@ -251,82 +256,15 @@ export const {
             setCustomTooltip(node, value);
         } else if (name === 'custom_tooltip_params') {
             setCustomTooltipParams(node, value);
-        } else if (
-            // CSS Layout Properties
-            name === 'width' ||
-            name === 'height' ||
-            name === 'flowChildren' ||
-            name === 'verticalAlign' ||
-            name === 'horizontalAlign' ||
-            name === 'align' ||
-            // Margin Properties
-            name === 'margin' ||
-            name === 'marginTop' ||
-            name === 'marginLeft' ||
-            name === 'marginBottom' ||
-            name === 'marginRight' ||
-            // Padding Properties
-            name === 'padding' ||
-            name === 'paddingTop' ||
-            name === 'paddingLeft' ||
-            name === 'paddingBottom' ||
-            name === 'paddingRight' ||
-            // Background Properties
-            name === 'backgroundImage' ||
-            name === 'backgroundSize' ||
-            name === 'backgroundColor' ||
-            name === 'washColor' ||
-            // Visual Properties
-            name === 'opacity' ||
-            // Position Properties
-            name === 'x' ||
-            name === 'y' ||
-            name === 'zIndex'
-        ) {
+        } else if (isCSSStyleProperty(name)) {
             // Apply CSS properties directly to style
             applyStyles(node, { [name]: value }, prev ? { [name]: prev } : undefined);
-        } else if (name === 'scroll') {
+        } else if (isCSSScrollProperty(name)) {
             // Scroll Properties
             applyStyles(node, { ["overflow"]: getOverflow(value) }, prev ? { ["overflow"]: prev } : undefined);
-        } else if (name === 'tooltip') {
-            // Handle tooltip property with auto-detection
-            if (typeof value === 'string') {
-                setTooltipText(node, value);
-            } else if (value && typeof value === 'object') {
-                if (value.name) {
-                    // Custom tooltip
-                    setCustomTooltip(node, [value.name, value.name]);
-                    if (Object.keys(value).length > 1) {
-                        const params = { ...value };
-                        delete params.name;
-                        setCustomTooltipParams(node, params);
-                    }
-                } else if (value.title || value.text) {
-                    // Title tooltip - combine title and text
-                    const tooltipText = value.title ? (value.text ? `${value.title}\n${value.text}` : value.title) : value.text;
-                    setTooltipText(node, tooltipText);
-                }
-            }
-        } else if (name === 'titleTooltip') {
-            // Handle title tooltip
-            if (value && typeof value === 'object' && (value.title || value.text)) {
-                const tooltipText = value.title ? (value.text ? `${value.title}\n${value.text}` : value.title) : value.text;
-                setTooltipText(node, tooltipText);
-            }
-        } else if (name === 'customTooltip') {
-            // Handle custom tooltip
-            if (value && typeof value === 'object' && value.name) {
-                setCustomTooltip(node, [value.name, value.name]);
-                const params = { ...value };
-                delete params.name;
-                if (Object.keys(params).length > 0) {
-                    setCustomTooltipParams(node, params);
-                }
-            }
-        } else if (name === 'tooltipPosition') {
-            // Handle tooltip position - this might need special implementation
-            // For now, we'll set it as an attribute
-            node.SetAttributeString('tooltip-position', String(value));
+        } else if (handleCSSTooltipProperty(node, name, value, setTooltipText, setCustomTooltip, setCustomTooltipParams)) {
+            // CSS Tooltip properties handled by centralized function
+            // No additional action needed
         } else if (
             name === 'onDragStart' ||
             name === 'onDragEnd' ||
