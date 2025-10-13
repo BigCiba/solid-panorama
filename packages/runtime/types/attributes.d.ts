@@ -80,7 +80,7 @@ declare interface PanelAttributes<T extends PanelBase = Panel> {
     zIndex?: number;
 
     // Scroll Properties  
-    scroll?: "x" | "y" | "both" | EOM_PanelScroll | [EOM_PanelScroll, EOM_PanelScroll];
+    scroll?: "x" | "y" | "both";
 
     ref?: T | ((element: T) => void);
 

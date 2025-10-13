@@ -281,12 +281,13 @@ export const {
             // Position Properties
             name === 'x' ||
             name === 'y' ||
-            name === 'zIndex' ||
-            // Scroll Properties
-            name === 'scroll'
+            name === 'zIndex'
         ) {
             // Apply CSS properties directly to style
             applyStyles(node, { [name]: value }, prev ? { [name]: prev } : undefined);
+        } else if (name === 'scroll') {
+            // Scroll Properties
+            applyStyles(node, { ["overflow"]: getOverflow(value) }, prev ? { ["overflow"]: prev } : undefined);
         } else if (name === 'tooltip') {
             // Handle tooltip property with auto-detection
             if (typeof value === 'string') {
@@ -463,6 +464,19 @@ function applyStyles(
         }
         // @ts-ignore
         node.style[k] = styles[k] === undefined ? null : styles[k];
+    }
+}
+
+function getOverflow(scroll: PanelAttributes["scroll"]): any {
+    switch (scroll) {
+        case "x":
+            return "scroll squish";
+        case "y":
+            return "squish scroll";
+        case "both":
+            return "scroll scroll";
+        default:
+            break;
     }
 }
 
