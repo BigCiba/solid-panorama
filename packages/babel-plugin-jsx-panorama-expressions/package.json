@@ -1,5 +1,5 @@
 {
-    "name": "babel-plugin-jsx-panorama-expressions",
+    "name": "@bigciba/babel-plugin-jsx-panorama-expressions",
     "version": "0.3.0",
     "description": "Modify from ryansolid/dom-expressions",
     "engines": {
