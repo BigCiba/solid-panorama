@@ -117,11 +117,6 @@ export const {
         }
         if (props.text) {
             el.__solidText = props.text;
-            if (props.text[0] === '#') {
-                el.text = $.Localize(props.text, el);
-            } else {
-                el.text = props.text;
-            }
         }
         return el;
     },
