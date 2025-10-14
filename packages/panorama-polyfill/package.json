@@ -1,5 +1,5 @@
 {
-    "name": "solid-panorama-polyfill",
+    "name": "@bigciba/solid-panorama-polyfill",
     "version": "0.2.0",
     "description": "",
     "engines": {
@@ -8,10 +8,10 @@
     "engineStrict": true,
     "main": "index.js",
     "license": "MIT",
-    "author": "RobinCode",
-    "homepage": "https://github.com/RobinCodeX/solid-panorama",
+    "author": "BigCiba",
+    "homepage": "https://github.com/BigCiba/solid-panorama",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/RobinCodeX/solid-panorama.git"
+        "url": "git+https://github.com/BigCiba/solid-panorama.git"
     }
 }

@@ -1,8 +1,8 @@
 {
     "private": true,
-    "name": "solid-panorama",
+    "name": "@bigciba/solid-panorama",
     "version": "0.1.0",
-    "author": "RobinCode <xv.robincode@gmail.com>",
+    "author": "BigCiba <lsj584665414@gmail.com>",
     "license": "MIT",
     "scripts": {
         "watch": "rollup -c -w --bundleConfigAsCjs",
