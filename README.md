@@ -98,34 +98,27 @@ You can now use CSS properties directly as JSX attributes without wrapping them 
 
 ### Supported CSS Properties
 
-**Layout Properties:**
-- `width`, `height` - Element dimensions
-- `flowChildren` - Child layout direction (`down`, `right`, etc.)
-- `verticalAlign`, `horizontalAlign`, `align` - Element alignment
+**Layout & Flow:** `width`, `height`, `minWidth`, `minHeight`, `maxWidth`, `maxHeight`, `flowChildren`, `verticalAlign`, `horizontalAlign`, `align`, `ignoreParentFlow`, `layoutPosition`, `overflow`, `perspective`, `perspectiveOrigin`
 
-**Spacing Properties:**
-- `margin`, `marginTop`, `marginLeft`, `marginBottom`, `marginRight` - Element margins
-- `padding`, `paddingTop`, `paddingLeft`, `paddingBottom`, `paddingRight` - Element padding
+**Spacing:** `margin`, `marginTop`, `marginLeft`, `marginBottom`, `marginRight`, `padding`, `paddingTop`, `paddingLeft`, `paddingBottom`, `paddingRight`
 
-**Background Properties:**
-- `backgroundImage` - Background image path
-- `backgroundSize` - Background image sizing
-- `backgroundColor` - Background color
-- `washColor` - Wash color overlay
+**Border & Outline:** `border`, `borderTop`, `borderBottom`, `borderLeft`, `borderRight`, `borderColor`, `borderBrush`, `borderStyle`, `borderWidth`, individual edge radii such as `borderTopLeftRadius`, `borderBottomRightRadius`, and width/style/color shorthands
 
-**Position Properties:**
-- `x`, `y` - Element position
-- `zIndex` - Z-order layering
+**Typography:** `font`, `fontFamily`, `fontSize`, `fontWeight`, `fontStyle`, `fontStretch`, `color`, `letter-spacing`, `lineHeight`, `textAlign`, `textDecoration`, `textDecorationStyle`, `textOverflow`, `textShadow`, `textTransform`
 
-**Visual Properties:**
-- `opacity` - Element transparency
-- `scroll` - Scroll behavior
+**Background & Texture:** `backgroundImage`, `backgroundSize`, `backgroundRepeat`, `backgroundPosition`, `backgroundTextureSize`, `backgroundBlur`, `backgroundColor`, `backgroundColorOpacity`, `backgroundImageOpacity`, `washColor`
 
-**Enhanced Tooltip Properties:**
-- `tooltip` - Simple text tooltip or complex tooltip object
-- `titleTooltip` - Title-style tooltip with title and text
-- `customTooltip` - Custom XML layout tooltip
-- `tooltipPosition` - Tooltip positioning
+**Visual Effects & Filters:** `opacity`, `opacityBrush`, `opacityMask`, `opacityMaskPosition`, `opacityMaskScale`, `brightness`, `hueRotation`, `blur`, `boxShadow`, `imgShadow`, `preTransformRotate2d`, `preTransformScale2d`, `saturation`, `textureSampling`, `uiScale`, `uiScaleX`, `uiScaleY`, `uiScaleZ`, `visibility`, `whiteSpace`, `worldBlur`
+
+**Audio & Interaction Feedback:** `sound`, `soundOut`
+
+**Position & Transform:** `x`, `y`, `zIndex`, `position`, `transform`, `transformOrigin`
+
+**Motion:** `transition`, `transitionDelay`, `transitionDuration`, `transitionHighFramerate`, `transitionProperty`, `transitionTimingFunction`, `animation`, `animationDelay`, `animationDirection`, `animationDuration`, `animationFillMode`, `animationIterationCount`, `animationName`, `animationTimingFunction`
+
+**Tooltip Helpers:** `tooltip`, `titleTooltip`, `customTooltip`, `tooltipPosition`, `tooltipArrowPosition`, `tooltipBodyPosition`
+
+**Scroll:** `scroll` (`"x"`, `"y"`, or `"both"`)
 
 ### Usage Examples
 

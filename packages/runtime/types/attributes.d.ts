@@ -1,3 +1,13 @@
+type TooltipContent = {
+    title?: string;
+    text?: string;
+    name?: string;
+} & Record<string, string | number | undefined>;
+
+type TooltipDefinition = string | TooltipContent;
+
+type CustomTooltipContent = { name: string; } & Record<string, string | number | undefined>;
+
 declare interface PanelAttributes<T extends PanelBase = Panel> {
     /**
      * Auto call SetDialogVariable on string,
@@ -37,49 +47,152 @@ declare interface PanelAttributes<T extends PanelBase = Panel> {
     visible?: boolean;
     checked?: boolean;
 
-    // CSS Layout Properties
-    width?: "fit-children" | `fill-parent-flow(${number})` | `height-percentage(${number}%)` | `${number}px` | `${number}%` | string;
-    height?: "fit-children" | `fill-parent-flow(${number})` | `width-percentage(${number}%)` | `${number}px` | `${number}%` | string;
+    // Layout & Flow
+    width?: "fit-children" | `fill-parent-flow(${number})` | `height-percentage(${number}%)` | `${number}px` | `${number}%` | number | string;
+    height?: "fit-children" | `fill-parent-flow(${number})` | `width-percentage(${number}%)` | `${number}px` | `${number}%` | number | string;
+    minWidth?: number | string;
+    minHeight?: number | string;
+    maxWidth?: number | string;
+    maxHeight?: number | string;
     flowChildren?: "right" | "right-wrap" | "down" | "down-wrap" | "left" | "left-wrap" | "up" | "up-wrap" | "none";
     verticalAlign?: "top" | "bottom" | "middle" | "center";
     horizontalAlign?: "left" | "right" | "middle" | "center";
-    align?: "left top" | "left center" | "left bottom" | "center top" | "center center" | "center bottom" | "right top" | "right center" | "right bottom";
+    align?: string;
+    ignoreParentFlow?: boolean | string;
+    layoutPosition?: string;
+    overflow?: string;
+    perspective?: number | string;
+    perspectiveOrigin?: string;
+
+    // Spacing
+    margin?: number | string;
+    marginTop?: number | string;
+    marginLeft?: number | string;
+    marginBottom?: number | string;
+    marginRight?: number | string;
+    padding?: number | string;
+    paddingTop?: number | string;
+    paddingLeft?: number | string;
+    paddingBottom?: number | string;
+    paddingRight?: number | string;
+
+    // Border & Outline
+    border?: number | string;
+    borderBottom?: number | string;
+    borderBottomColor?: string;
+    borderBottomLeftRadius?: number | string;
+    borderBottomRightRadius?: number | string;
+    borderBottomStyle?: string;
+    borderBottomWidth?: number | string;
+    borderBrush?: string;
+    borderColor?: string;
+    borderLeft?: number | string;
+    borderLeftColor?: string;
+    borderLeftStyle?: string;
+    borderLeftWidth?: number | string;
+    borderRadius?: number | string;
+    borderRight?: number | string;
+    borderRightColor?: string;
+    borderRightStyle?: string;
+    borderRightWidth?: number | string;
+    borderStyle?: string;
+    borderTop?: number | string;
+    borderTopColor?: string;
+    borderTopLeftRadius?: number | string;
+    borderTopRightRadius?: number | string;
+    borderTopStyle?: string;
+    borderTopWidth?: number | string;
+    borderWidth?: number | string;
+
+    // Typography
+    font?: string;
+    fontFamily?: string;
+    fontSize?: number | string;
+    fontStretch?: string;
+    fontStyle?: string;
+    fontWeight?: number | string;
+    color?: string;
+    'letter-spacing'?: number | string;
+    lineHeight?: number | string;
+    textAlign?: string;
+    textDecoration?: string;
+    textDecorationStyle?: string;
+    textOverflow?: string;
+    textShadow?: string;
+    textTransform?: string;
+
+    // Background & Texture
+    backgroundBlur?: number | string;
+    backgroundColor?: string;
+    backgroundColorOpacity?: number | string;
+    backgroundImage?: string;
+    backgroundImageOpacity?: number | string;
+    backgroundPosition?: string;
+    backgroundRepeat?: string;
+    backgroundSize?: string;
+    backgroundTextureSize?: string;
+
+    // Visual Effects & Filters
+    opacity?: number | string;
+    opacityBrush?: string;
+    opacityMask?: string;
+    opacityMaskPosition?: string;
+    opacityMaskScale?: number | string;
+    brightness?: number | string;
+    hueRotation?: number | string;
+    washColor?: string;
+    blur?: number | string;
+    boxShadow?: string;
+    imgShadow?: string;
+    preTransformRotate2d?: string;
+    preTransformScale2d?: string;
+    saturation?: number | string;
+    textureSampling?: string;
+    uiScale?: number | string;
+    uiScaleX?: number | string;
+    uiScaleY?: number | string;
+    uiScaleZ?: number | string;
+    visibility?: string;
+    whiteSpace?: string;
+    worldBlur?: number | string;
+
+    // Audio & Interaction Feedback
+    sound?: string;
+    soundOut?: string;
+
+    // Position & Transform
+    x?: number | string;
+    y?: number | string;
+    zIndex?: number | string;
+    position?: string;
+    transform?: string;
+    transformOrigin?: string;
+
+    // Motion (Transitions & Animations)
+    transition?: string;
+    transitionDelay?: string;
+    transitionDuration?: string;
+    transitionHighFramerate?: boolean | string;
+    transitionProperty?: string;
+    transitionTimingFunction?: string;
+    animation?: string;
+    animationDelay?: string;
+    animationDirection?: "normal" | "reverse" | "alternate" | "alternate-reverse";
+    animationDuration?: string;
+    animationFillMode?: "none" | "forwards" | "backwards" | "both";
+    animationIterationCount?: number | "infinite";
+    animationName?: string;
+    animationTimingFunction?: string;
 
     // Enhanced Tooltip Properties
-    tooltip?: string | { title?: string; text?: string; name?: string; };
-    titleTooltip?: { title: string; text: string; };
-    customTooltip?: { name: string; } & Record<string, any>;
+    tooltip?: TooltipDefinition;
+    titleTooltip?: TooltipContent;
+    customTooltip?: CustomTooltipContent;
     tooltipPosition?: string;
+    tooltipArrowPosition?: string;
+    tooltipBodyPosition?: string;
 
-    // Margin Properties
-    margin?: string;
-    marginTop?: string;
-    marginLeft?: string;
-    marginBottom?: string;
-    marginRight?: string;
-
-    // Padding Properties
-    padding?: string;
-    paddingTop?: string;
-    paddingLeft?: string;
-    paddingBottom?: string;
-    paddingRight?: string;
-
-    // Background Properties
-    backgroundImage?: string;
-    backgroundSize?: string;
-    backgroundColor?: string;
-    washColor?: string;
-
-    // Visual Properties
-    opacity?: string;
-
-    // Position Properties
-    x?: string;
-    y?: string;
-    zIndex?: number;
-
-    // Scroll Properties  
+    // Scroll Properties
     scroll?: "x" | "y" | "both";
 
     ref?: T | ((element: T) => void);

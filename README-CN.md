@@ -95,34 +95,27 @@ Thanks to ark120202 for creating [react-panorama](https://github.com/ark120202/r
 
 ### 支持的 CSS 属性
 
-**布局属性：**
-- `width`, `height` - 元素尺寸
-- `flowChildren` - 子元素布局方向（`down`, `right` 等）
-- `verticalAlign`, `horizontalAlign`, `align` - 元素对齐方式
+**布局与流式：** `width`, `height`, `minWidth`, `minHeight`, `maxWidth`, `maxHeight`, `flowChildren`, `verticalAlign`, `horizontalAlign`, `align`, `ignoreParentFlow`, `layoutPosition`, `overflow`, `perspective`, `perspectiveOrigin`
 
-**间距属性：**
-- `margin`, `marginTop`, `marginLeft`, `marginBottom`, `marginRight` - 元素外边距
-- `padding`, `paddingTop`, `paddingLeft`, `paddingBottom`, `paddingRight` - 元素内边距
+**间距：** `margin`, `marginTop`, `marginLeft`, `marginBottom`, `marginRight`, `padding`, `paddingTop`, `paddingLeft`, `paddingBottom`, `paddingRight`
 
-**背景属性：**
-- `backgroundImage` - 背景图片路径
-- `backgroundSize` - 背景图片大小
-- `backgroundColor` - 背景颜色
-- `washColor` - 遮罩颜色
+**边框与轮廓：** `border`, `borderTop`, `borderBottom`, `borderLeft`, `borderRight`, `borderColor`, `borderBrush`, `borderStyle`, `borderWidth`，以及 `borderTopLeftRadius`, `borderBottomRightRadius` 等边角半径和宽度/样式/颜色细分属性
 
-**定位属性：**
-- `x`, `y` - 元素位置
-- `zIndex` - Z 轴层级
+**排版：** `font`, `fontFamily`, `fontSize`, `fontWeight`, `fontStyle`, `fontStretch`, `color`, `letter-spacing`, `lineHeight`, `textAlign`, `textDecoration`, `textDecorationStyle`, `textOverflow`, `textShadow`, `textTransform`
 
-**视觉属性：**
-- `opacity` - 元素透明度
-- `scroll` - 滚动行为
+**背景与纹理：** `backgroundImage`, `backgroundSize`, `backgroundRepeat`, `backgroundPosition`, `backgroundTextureSize`, `backgroundBlur`, `backgroundColor`, `backgroundColorOpacity`, `backgroundImageOpacity`, `washColor`
 
-**增强工具提示属性：**
-- `tooltip` - 简单文本工具提示或复杂工具提示对象
-- `titleTooltip` - 带标题和文本的工具提示
-- `customTooltip` - 自定义 XML 布局工具提示
-- `tooltipPosition` - 工具提示位置
+**视觉效果与滤镜：** `opacity`, `opacityBrush`, `opacityMask`, `opacityMaskPosition`, `opacityMaskScale`, `brightness`, `hueRotation`, `blur`, `boxShadow`, `imgShadow`, `preTransformRotate2d`, `preTransformScale2d`, `saturation`, `textureSampling`, `uiScale`, `uiScaleX`, `uiScaleY`, `uiScaleZ`, `visibility`, `whiteSpace`, `worldBlur`
+
+**音频与交互反馈：** `sound`, `soundOut`
+
+**定位与变换：** `x`, `y`, `zIndex`, `position`, `transform`, `transformOrigin`
+
+**动效：** `transition`, `transitionDelay`, `transitionDuration`, `transitionHighFramerate`, `transitionProperty`, `transitionTimingFunction`, `animation`, `animationDelay`, `animationDirection`, `animationDuration`, `animationFillMode`, `animationIterationCount`, `animationName`, `animationTimingFunction`
+
+**工具提示辅助：** `tooltip`, `titleTooltip`, `customTooltip`, `tooltipPosition`, `tooltipArrowPosition`, `tooltipBodyPosition`
+
+**滚动：** `scroll`（`"x"`、`"y"` 或 `"both"`）
 
 ### 使用示例
 

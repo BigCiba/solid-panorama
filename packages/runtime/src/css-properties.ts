@@ -1,50 +1,195 @@
 /**
  * Panorama CSS Properties Configuration
- * 
- * This file defines all supported CSS properties for solid-panorama runtime.
- * These properties can be used directly as JSX attributes and will be 
- * automatically converted to appropriate Panorama API calls.
+ *
+ * The grouped lists below keep runtime property handling, type definitions,
+ * and documentation in sync. Each category mirrors the way Panorama CSS
+ * organizes layout, visuals, interaction, and motion.
  */
 
-// All CSS Style Properties (excluding scroll and tooltip)
-export const CSS_STYLE_PROPERTIES = [
-	// Layout Properties
+// Layout & Flow
+const LAYOUT_PROPERTIES = [
 	'width',
 	'height',
+	'minWidth',
+	'minHeight',
+	'maxWidth',
+	'maxHeight',
 	'flowChildren',
 	'verticalAlign',
 	'horizontalAlign',
 	'align',
+	'ignoreParentFlow',
+	'layoutPosition',
+	'overflow',
+	'perspective',
+	'perspectiveOrigin'
+];
 
-	// Margin Properties
+// Spacing (Margin & Padding)
+const SPACING_PROPERTIES = [
 	'margin',
 	'marginTop',
 	'marginLeft',
 	'marginBottom',
 	'marginRight',
-
-	// Padding Properties
 	'padding',
 	'paddingTop',
 	'paddingLeft',
 	'paddingBottom',
-	'paddingRight',
+	'paddingRight'
+];
 
-	// Background Properties
-	'backgroundImage',
-	'backgroundSize',
+// Border & Outline
+const BORDER_PROPERTIES = [
+	'border',
+	'borderBottom',
+	'borderBottomColor',
+	'borderBottomLeftRadius',
+	'borderBottomRightRadius',
+	'borderBottomStyle',
+	'borderBottomWidth',
+	'borderBrush',
+	'borderColor',
+	'borderLeft',
+	'borderLeftColor',
+	'borderLeftStyle',
+	'borderLeftWidth',
+	'borderRadius',
+	'borderRight',
+	'borderRightColor',
+	'borderRightStyle',
+	'borderRightWidth',
+	'borderStyle',
+	'borderTop',
+	'borderTopColor',
+	'borderTopLeftRadius',
+	'borderTopRightRadius',
+	'borderTopStyle',
+	'borderTopWidth',
+	'borderWidth'
+];
+
+// Typography
+const TYPOGRAPHY_PROPERTIES = [
+	'font',
+	'fontFamily',
+	'fontSize',
+	'fontStretch',
+	'fontStyle',
+	'fontWeight',
+	'color',
+	'letter-spacing',
+	'lineHeight',
+	'textAlign',
+	'textDecoration',
+	'textDecorationStyle',
+	'textOverflow',
+	'textShadow',
+	'textTransform'
+];
+
+// Background & Texture
+const BACKGROUND_PROPERTIES = [
+	'backgroundBlur',
 	'backgroundColor',
-	'washColor',
+	'backgroundColorOpacity',
+	'backgroundImage',
+	'backgroundImageOpacity',
+	'backgroundPosition',
+	'backgroundRepeat',
+	'backgroundSize',
+	'backgroundTextureSize'
+];
 
-	// Visual Properties
+// Visual Effects & Filters
+const VISUAL_PROPERTIES = [
 	'opacity',
+	'opacityBrush',
+	'opacityMask',
+	'opacityMaskPosition',
+	'opacityMaskScale',
+	'brightness',
+	'hueRotation',
+	'washColor',
+	'blur',
+	'boxShadow',
+	'imgShadow',
+	'preTransformRotate2d',
+	'preTransformScale2d',
+	'saturation',
+	'textureSampling',
+	'uiScale',
+	'uiScaleX',
+	'uiScaleY',
+	'uiScaleZ',
+	'visibility',
+	'whiteSpace',
+	'worldBlur'
+];
 
-	// Position Properties
+// Audio & Interaction Feedback
+const INTERACTION_PROPERTIES = [
+	'sound',
+	'soundOut'
+];
+
+// Positioning
+const POSITION_PROPERTIES = [
 	'x',
 	'y',
 	'zIndex',
+	'position'
+];
 
-	'tooltipPosition'
+// Transformations
+const TRANSFORM_PROPERTIES = [
+	'transform',
+	'transformOrigin'
+];
+
+// Transitions
+const TRANSITION_PROPERTIES = [
+	'transition',
+	'transitionDelay',
+	'transitionDuration',
+	'transitionHighFramerate',
+	'transitionProperty',
+	'transitionTimingFunction'
+];
+
+// Animations
+const ANIMATION_PROPERTIES = [
+	'animation',
+	'animationDelay',
+	'animationDirection',
+	'animationDuration',
+	'animationFillMode',
+	'animationIterationCount',
+	'animationName',
+	'animationTimingFunction'
+];
+
+// Tooltip layout helper properties
+const TOOLTIP_POSITION_PROPERTIES = [
+	'tooltipPosition',
+	'tooltipArrowPosition',
+	'tooltipBodyPosition'
+];
+
+// All CSS Style Properties (excluding scroll and enhanced tooltip logic)
+export const CSS_STYLE_PROPERTIES = [
+	...LAYOUT_PROPERTIES,
+	...SPACING_PROPERTIES,
+	...BORDER_PROPERTIES,
+	...TYPOGRAPHY_PROPERTIES,
+	...BACKGROUND_PROPERTIES,
+	...VISUAL_PROPERTIES,
+	...INTERACTION_PROPERTIES,
+	...POSITION_PROPERTIES,
+	...TRANSFORM_PROPERTIES,
+	...TRANSITION_PROPERTIES,
+	...ANIMATION_PROPERTIES,
+	...TOOLTIP_POSITION_PROPERTIES
 ];
 
 // Scroll Properties (handled specially)

@@ -69,7 +69,7 @@ export const {
             snippet,
             vars,
             dialogVariables,
-            text,
+
             style,
             visible,
             enabled,
@@ -115,12 +115,12 @@ export const {
         if (dialogVariables) {
             setDialogVariables(el, dialogVariables, {});
         }
-        if (text) {
-            el.__solidText = text;
-            if (text[0] === '#') {
-                el.text = $.Localize(text, el);
+        if (props.text) {
+            el.__solidText = props.text;
+            if (props.text[0] === '#') {
+                el.text = $.Localize(props.text, el);
             } else {
-                el.text = text;
+                el.text = props.text;
             }
         }
         return el;
@@ -432,7 +432,7 @@ function applyStyles(
     }
 }
 
-function getOverflow(scroll: PanelAttributes["scroll"]): any {
+function getOverflow(scroll: "x" | "y" | "both"): any {
     switch (scroll) {
         case "x":
             return "scroll squish";
