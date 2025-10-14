@@ -3,9 +3,11 @@
 import {
     Accessor,
     ComponentProps,
+    createContext,
     createMemo,
     splitProps,
     untrack,
+    useContext,
     ValidComponent
 } from 'solid-js';
 import { createRenderer } from 'solid-js/universal';
@@ -31,6 +33,8 @@ export {
 } from 'solid-js';
 
 const hasOwn = Object.prototype.hasOwnProperty;
+
+const __ContextPanelContext__ = createContext<{ panel: Panel | null; }>({ panel: null });
 
 /** The deleted node will be moved to trash and then delete it */
 const nodeTrash = (function () {
@@ -81,12 +85,14 @@ export const {
         if (type === 'GenericPanel') {
             type = _type;
         }
+        let handler = useContext(__ContextPanelContext__);
         const el = $.CreatePanel(
             type,
-            parent || $.GetContextPanel(),
+            handler.panel || parent || $.GetContextPanel(),
             id || '',
             _props
         ) as LabelPanel;
+        el.SetParent(parent || $.GetContextPanel());
         if (typeof visible === 'boolean') {
             el.visible = visible;
         }
@@ -110,12 +116,8 @@ export const {
             setDialogVariables(el, dialogVariables, {});
         }
         if (text) {
-            if (text[0] === '#') {
-                el.__solidText = text;
-                el.text = $.Localize(text, el);
-            } else {
-                el.text = text;
-            }
+            // 让text="{d:value}"也能生效
+            el.__solidText = text;
         }
         return el;
     },
@@ -142,6 +144,11 @@ export const {
         }
         return child;
     },
+    createEmptyNode(parent: Panel) {
+        let node = $.CreatePanel('Panel', parent || $.GetContextPanel(), '');
+        node.visible = false;
+        return node;
+    },
 
     replaceText(textNode: LabelPanel, value) {
         if (!textNode || !textNode.IsValid()) {
@@ -166,6 +173,9 @@ export const {
             return;
         }
         node.SetParent(parent);
+        if (parent.__solidRenderRoot) {
+            node.__solidChild = true;
+        }
         if (anchor && anchor.IsValid()) {
             parent.MoveChildBefore(node, anchor);
         }
@@ -177,9 +187,7 @@ export const {
         }
         node.SetParent(nodeTrash);
         $.Schedule(0, () => {
-            if (node.GetParent() === nodeTrash) {
-                node.DeleteAsync(0);
-            }
+            nodeTrash.RemoveAndDeleteChildren();
         });
     },
 
@@ -329,17 +337,32 @@ declare global {
     interface Panel {
         __solidDisposer?: () => void;
         __solidText?: string;
+        __solidRenderRoot?: boolean;
+        __solidChild?: boolean;
     }
 }
 
 export function render(code: () => any, container: Panel) {
     if (container.__solidDisposer) {
         container.__solidDisposer();
-        container.RemoveAndDeleteChildren();
+        for (const c of container.Children()) {
+            if (c.__solidChild) {
+                c.SetParent(nodeTrash);
+            }
+        }
+        nodeTrash.RemoveAndDeleteChildren();
     }
+    container.__solidRenderRoot = true;
     Object.defineProperty(container, '__solidDisposer', {
         configurable: true,
-        value: _render(code, container)
+        value: _render(() => createComponent(__ContextPanelContext__.Provider, {
+            value: {
+                panel: container
+            },
+            get children() {
+                return createComponent(code, {});
+            }
+        }), container)
     });
     return container.__solidDisposer;
 }
@@ -443,7 +466,7 @@ function setDialogVariables(
                 node.SetDialogVariable(key, `[!s:${key}]`);
             } else if (typeof value === 'number') {
                 node.SetDialogVariableInt(key, NaN);
-            } else {
+            } else if (typeof value.getTime === 'function') {
                 node.SetDialogVariableTime(key, PANORAMA_INVALID_DATE);
             }
         }

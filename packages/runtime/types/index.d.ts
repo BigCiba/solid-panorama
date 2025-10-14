@@ -22,14 +22,10 @@ export const {
 }: Renderer<Panel>;
 
 export {
-    For,
-    Show,
+    ErrorBoundary, For, Index, Match, Show,
     Suspense,
     SuspenseList,
-    Switch,
-    Match,
-    Index,
-    ErrorBoundary
+    Switch
 } from 'solid-js';
 
 export type DynamicProps<T extends ValidComponent, P = ComponentProps<T>> = {
@@ -51,15 +47,21 @@ export function Dynamic<T extends ValidComponent>(
     props: DynamicProps<T>
 ): Accessor<JSX.Element>;
 
+/**
+ * 将组件渲染到mount里而不是parent
+ * @param mount 最终渲染到的Panel
+ */
+export function Portal(props: { mount?: Panel, children?: JSX.Element; }): any;
+
 declare module 'solid-js' {
     namespace JSX {
         interface IntrinsicElements {
-            root: { children?: any };
-            styles: { children?: any };
-            scripts: { children?: any };
-            include: { src: string };
-            snippets: { children?: any };
-            snippet: { name: string; children?: any };
+            root: { children?: any; };
+            styles: { children?: any; };
+            scripts: { children?: any; };
+            include: { src: string; };
+            snippets: { children?: any; };
+            snippet: { name: string; children?: any; };
         }
     }
 }
