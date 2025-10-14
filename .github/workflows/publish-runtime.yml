@@ -1,14 +1,5 @@
 name: Publish runtime
-on:
-  workflow_dispatch:
-    inputs:
-      release_type:
-        description: 'Semver increment (patch, minor, major)'
-        required: false
-        default: patch
-      custom_version:
-        description: 'Explicit version (overrides release_type)'
-        required: false
+on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,19 +14,8 @@ jobs:
           version: latest
           run_install: |
             - args: [--frozen-lockfile]
-      - name: Bump runtime version
-        env:
-          RELEASE_TYPE: ${{ inputs.release_type }}
-          CUSTOM_VERSION: ${{ inputs.custom_version }}
-        run: |
-          set -euo pipefail
-          VERSION_ARG="${CUSTOM_VERSION:-${RELEASE_TYPE:-patch}}"
-          pnpm version "$VERSION_ARG" --filter @bigciba/solid-panorama-runtime --git-tag-version=false
-      - name: Show runtime version
-        run: node -p "require('./packages/runtime/package.json').version"
       - run: pnpm build:runtime
       - run: cp README.md dist/runtime/
-      - name: Publish package
-        run: pnpm publish dist/runtime --no-git-checks --access public
+      - run: pnpm publish dist/runtime --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
