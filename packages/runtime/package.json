@@ -1,5 +1,5 @@
 {
-    "name": "solid-panorama-runtime",
+    "name": "@bigciba/solid-panorama-runtime",
     "version": "0.5.6",
     "description": "Solid.js runtime for Valve's Panorama UI (for Dota 2 Custom Games).",
     "engines": {
@@ -8,11 +8,11 @@
     "engineStrict": true,
     "main": "index.js",
     "license": "MIT",
-    "author": "RobinCode",
-    "homepage": "https://github.com/RobinCodeX/solid-panorama",
+    "author": "BigCiba",
+    "homepage": "https://github.com/BigCiba/solid-panorama",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/RobinCodeX/solid-panorama.git"
+        "url": "git+https://github.com/BigCiba/solid-panorama.git"
     },
     "dependencies": {
         "@moddota/panorama-types": "^1.35.0",
