@@ -1,4 +1,4 @@
-const jsxTransform = require('babel-plugin-jsx-panorama-expressions');
+const jsxTransform = require('@bigciba/babel-plugin-jsx-panorama-expressions');
 
 module.exports = function (context, options = {}) {
     const plugins = [
