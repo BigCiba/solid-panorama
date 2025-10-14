@@ -116,8 +116,12 @@ export const {
             setDialogVariables(el, dialogVariables, {});
         }
         if (text) {
-            // 让text="{d:value}"也能生效
             el.__solidText = text;
+            if (text[0] === '#') {
+                el.text = $.Localize(text, el);
+            } else {
+                el.text = text;
+            }
         }
         return el;
     },
