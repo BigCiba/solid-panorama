@@ -102,7 +102,9 @@ export const {
         if (typeof checked === 'boolean') {
             el.checked = checked;
         }
-        el.SetDisableFocusOnMouseDown(true);
+        if (type != "TextEntry") {
+            el.SetDisableFocusOnMouseDown(true);
+        }
         if (!styleIsString) {
             applyStyles(el, style);
         }
