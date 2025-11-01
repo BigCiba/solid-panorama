@@ -2,13 +2,14 @@
 
 ## Architecture Overview
 
-This is a **monorepo** that brings SolidJS reactive programming to Valve's Panorama UI system for Dota 2 modding. The project consists of 4 core packages that work together:
+This is a **monorepo** that brings SolidJS reactive programming to Valve's Panorama UI system for Dota 2 modding. The project consists of 5 core packages that work together:
 
 - **`packages/runtime/`** - Core SolidJS-to-Panorama adapter with custom `createElement` and DOM manipulation
 - **`packages/babel-plugin-jsx-panorama-expressions/`** - JSX transformer that converts React-like syntax to Panorama API calls
 - **`packages/babel-preset-solid-panorama/`** - Babel preset that configures the JSX plugin with proper settings
 - **`packages/panorama-polyfill/`** - Web APIs like `console.log`, `setTimeout` for Panorama environment
 - **`packages/panorama-all-in-jsx/`** - Babel macros for embedding XML/CSS directly in JSX files
+- **`packages/expressions/`** - Additional utility functions and reconciliation helpers
 
 ## Key Concepts
 
@@ -45,22 +46,35 @@ The plugin transforms special props (defined in `packages/babel-plugin-jsx-panor
 # Build everything
 npm run build
 
-# Build specific packages
+# Build specific packages  
 npm run build:runtime    # solid-panorama-runtime only
-npm run build:jsx       # babel-plugin-jsx-panorama-expressions only  
+npm run build:jsx       # babel-plugin-jsx-panorama-expressions only
 npm run build:macros    # panorama-all-in-jsx only
 npm run build:polyfill  # panorama-polyfill only
 
-# Watch mode
+# Watch mode for development
 npm run watch
+
+# Local development setup
+npm run link-local      # Creates npm links for local testing
+npm run unlink-local    # Removes npm links
 ```
 
-### Testing
+### Testing & Quality
 ```bash
-npm test              # Run Jest snapshot tests
+npm test              # Run Jest snapshot tests (currently no test files exist)
 npm run test-update   # Update snapshots
+npm run lint:prettier # Check code formatting
+npm run write-prettier # Auto-format code
 ```
-See `__tests__/compile.test.ts` for transformation examples.
+
+### Package Management
+```bash
+npm run update_deps   # Update dependencies via update_deps.mjs
+npm run publish:jsx   # Publish JSX plugin package
+npm run publish:jsx:minor # Publish with minor version bump
+npm run publish:jsx:major # Publish with major version bump
+```
 
 ## Project-Specific Patterns
 
@@ -147,6 +161,21 @@ xml(<root><snippet name="MySnippet"><Panel /></snippet></root>);
 const styles = css`
     .my-button { color: red; }
 `;
+```
+
+### Game Event Hooks
+Use the `events.macro` for game event integration:
+```tsx
+import { useGameEvent, useNetTable } from 'solid-panorama-all-in-jsx/events.macro';
+
+function MyComponent() {
+    useGameEvent('dota_player_killed', (event) => {
+        // Handle game event
+    });
+    
+    const [netTableData] = useNetTable('table_name', 'key');
+    return <Panel>{netTableData()}</Panel>;
+}
 ```
 
 ## Dependencies & External Context

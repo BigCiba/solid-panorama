@@ -1,4 +1,4 @@
-import { ParentComponent, VoidComponent } from 'solid-js';
+import { ParentComponent } from 'solid-js';
 
 declare global {
     const Panel: ParentComponent<PanelAttributes<Panel>>;
@@ -53,6 +53,9 @@ declare global {
     const DOTAMinimap: ParentComponent<PanelAttributes>;
 
     const HTML: ParentComponent<HTMLAttributes>;
+
+    const TabButton: ParentComponent<TabButtonAttributes>;
+    const TabContents: ParentComponent<TabContentsAttributes>;
 
     const DOTAPortrait: ParentComponent<DOTAPortraitAttributes>;
 

@@ -207,6 +207,7 @@ declare interface PanelAttributes<T extends PanelBase = Panel> {
 
     onload?: string | EventHandler<T>;
     onfocus?: string | EventHandler<T>;
+    onblur?: string | EventHandler<T>;
     onactivate?: string | EventHandler<T>;
     onmouseactivate?: string | EventHandler<T>;
     ondblclick?: string | EventHandler<T>;
@@ -331,8 +332,15 @@ declare interface DOTAHeroMovieAttributes extends PanelAttributes<HeroMovie> {
 }
 
 declare interface DOTAScenePanelAttributes extends PanelAttributes<ScenePanel> {
-    unit?: string;
+    'post-process-fade'?: number;
+    'post-process-material'?: string;
+    'animate-during-pause'?: boolean;
+    'pin-fov'?: 'horizontal' | 'vertical';
+    'live-mode'?: 'high_end_only' | string;
+    'no-intro-effects'?: boolean;
+    environment?: 'default' | 'full_body' | 'full_body_right_side' | 'card';
     'activity-modifier'?: string;
+    unit?: string;
 
     map?: string;
     camera?: string;
@@ -342,34 +350,36 @@ declare interface DOTAScenePanelAttributes extends PanelAttributes<ScenePanel> {
     pitchmax?: number;
     yawmin?: number;
     yawmax?: number;
+    acceleration?: number;
+    autorotatespeed?: number;
     allowrotation?: boolean;
     rotateonhover?: boolean;
     rotateonmousemove?: boolean;
 
-    // acceleration?: number;
     antialias?: boolean;
     deferredalpha?: boolean;
     drawbackground?: boolean;
-    environment?: string;
-    // 'live-mode'?: any;
     panoramasurfaceheight?: number;
     panoramasurfacewidth?: number;
     panoramasurfacexml?: string;
     particleonly?: boolean;
-    // 'pin-fov'?: any;
     renderdeferred?: boolean;
     rendershadows?: boolean;
-    // renderwaterreflections?: boolean;
+    renderwaterreflections?: boolean;
+    allowsuspendrepaint?: boolean;
 }
 
 declare interface DOTAParticleScenePanelAttributes
     extends PanelAttributes<ParticleScenePanel> {
-    particleonly?: boolean;
+    syncSpawn?: boolean;
+    fov?: number;
+    startActive?: boolean;
     squarePixels?: boolean;
-    particleName: string;
-    cameraOrigin?: string;
-    lookAt?: string;
-    fov?: number | string;
+    farPlane?: number;
+    lookAt?: [number, number, number] | string;
+    cameraOrigin?: [number, number, number] | string;
+    useMapCamera?: boolean;
+    particleName?: string;
 }
 
 declare interface DOTAEconItemAttributes
@@ -539,3 +549,22 @@ declare interface CustomLayoutPanelAttributes extends PanelAttributes {
 }
 
 declare interface DOTAPortraitAttributes extends PanelAttributes { }
+
+declare interface TabButtonAttributes extends PanelAttributes {
+    group?: string;
+    localizedText?: string;
+    html?: boolean;
+
+    selected?: boolean;
+    onselect?: EventHandler<Panel>;
+    ondeselect?: EventHandler<Panel>;
+}
+
+declare interface TabContentsAttributes extends PanelAttributes {
+    tabid?: string;
+    group?: string;
+
+    selected?: boolean;
+    onselect?: EventHandler<Panel>;
+    ondeselect?: EventHandler<Panel>;
+}
