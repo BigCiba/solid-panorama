@@ -46,5 +46,7 @@ export default [
     'DOTAStoreCustomControls',
     'CustomLayoutPanel',
     'DOTAPortrait',
+    'TabButton',
+    'TabContents',
     'GenericPanel'
 ];
