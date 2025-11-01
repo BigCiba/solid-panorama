@@ -552,7 +552,7 @@ declare interface DOTAPortraitAttributes extends PanelAttributes { }
 
 declare interface TabButtonAttributes extends PanelAttributes {
     group?: string;
-    localizedText?: string;
+    text?: string;
     html?: boolean;
 
     selected?: boolean;
