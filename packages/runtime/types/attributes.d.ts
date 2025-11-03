@@ -46,6 +46,27 @@ declare interface PanelAttributes<T extends PanelBase = Panel> {
     enabled?: boolean;
     visible?: boolean;
     checked?: boolean;
+    useglobalcontext?: boolean;
+    disallowedstyleflags?: string;
+    'never-cache-composition-layer'?: boolean;
+    'always-cache-composition-layer'?: boolean;
+    'require-composition-layer'?: boolean;
+    registerforreadyevents?: boolean;
+    readyfordisplay?: boolean;
+    clipaftertransform?: boolean;
+    rememberchildfocus?: boolean;
+    keepscrolltobottom?: boolean;
+    sendchildscrolledintoviewevents?: boolean;
+    'overscroll-x'?: number;
+    'overscroll-y'?: number;
+    scrollparenttofitwhenfocused?: boolean;
+    acceptsinput?: boolean;
+    analogstickscroll?: boolean;
+    childfocusonhover?: boolean;
+    focusonhover?: boolean;
+    mousecanactivate?: 'unfocused' | 'iffocused' | 'ifparentfocused(<parentid>)' | string;
+    defaultfocus?: string;
+    selectionposboundary?: 'both' | 'vertical' | 'horizontal' | string;
 
     // Layout & Flow
     width?: "fit-children" | `fill-parent-flow(${number})` | `height-percentage(${number}%)` | `${number}px` | `${number}%` | number | string;
@@ -205,9 +226,9 @@ declare interface PanelAttributes<T extends PanelBase = Panel> {
     custom_tooltip?: [string, string];
     custom_tooltip_params?: Record<string, string | number>;
 
+    onpanelevent?: string | EventHandler<T>;
     onload?: string | EventHandler<T>;
     onfocus?: string | EventHandler<T>;
-    onblur?: string | EventHandler<T>;
     onactivate?: string | EventHandler<T>;
     onmouseactivate?: string | EventHandler<T>;
     ondblclick?: string | EventHandler<T>;
@@ -220,6 +241,14 @@ declare interface PanelAttributes<T extends PanelBase = Panel> {
     onmoveup?: string | EventHandler<T>;
     oncancel?: string | EventHandler<T>;
     ontabforward?: string | EventHandler<T>;
+    ondescendantfocus?: string | EventHandler<T>;
+    onblur?: string | EventHandler<T>;
+    ondescendantblur?: EventHandler<T>;
+    ontabbackward?: EventHandler<T>;
+    onscrolledtobottom?: EventHandler<T>;
+    onscrolledtorightedge?: EventHandler<T>;
+    onselect?: EventHandler<T>;
+    ondeselect?: EventHandler<T>;
     ontooltiploaded?: string | EventHandler<T>;
 
     // custom events
@@ -244,11 +273,34 @@ declare interface LabelLikeAttributes<T extends Panel>
 
 declare interface LabelAttributes extends LabelLikeAttributes<LabelPanel> {
     allowtextselection?: boolean;
+    imgscaling?: number;
 }
 
 declare interface ImageAttributes<T extends ImagePanel = ImagePanel>
     extends PanelAttributes<T> {
+    svgfillrule?: 'nonzero' | 'evenodd';
+    svgopacity?: number;
+    svgstrokeopacity?: number;
+    svgstrokelinejoin?: 'miter' | 'round' | 'bevel' | 'inherit';
+    svgstrokelinecap?: 'butt' | 'round' | 'square';
+    svgstrokewidth?: number;
+    svgstroke?: '#ffffff' | string;
+    svgfillopacity?: number;
+    svgfill?: '#ffffff' | string;
+    /**
+     * texturewidth and textureheight can be used to override the size of vector graphics. Default value of -1 indicates texture width/height to be determined from source file
+     */
+    texturewidth?: number;
+    /**
+     * texturewidth and textureheight can be used to override the size of vector graphics. Default value of -1 indicates texture width/height to be determined from source file
+     */
+    textureheight?: number;
+    srcset?: string;
+    animate?: string;
+    defaultsrc?: string;
     src?: string;
+    verticalalign?: 'top' | 'bottom' | 'center' | 'middle';
+    horizontalalign?: 'left' | 'right' | 'center' | 'middle';
     scaling?: ScalingFunction;
 }
 
@@ -310,11 +362,15 @@ declare type MovieAutoPlay = 'off' | 'onload' | 'onfocus';
 
 declare interface MovieAttributes extends PanelAttributes<MoviePanel> {
     src?: string;
+    volume?: number;
+    muted?: boolean;
     repeat?: boolean;
-    controls?: Parameters<MoviePanel['SetControls']>[0];
-    title?: string;
+    notreadybehavior?: boolean;
+    loadbehavior?: boolean;
     /** @default 'onload' */
     autoplay?: MovieAutoPlay;
+    title?: string;
+    controls?: Parameters<MoviePanel['SetControls']>[0];
 }
 
 declare interface MoviePanelAttributes extends PanelAttributes<MoviePanel> {
@@ -324,11 +380,18 @@ declare interface MoviePanelAttributes extends PanelAttributes<MoviePanel> {
 }
 
 declare interface DOTAHeroMovieAttributes extends PanelAttributes<HeroMovie> {
-    heroid?: HeroID;
-    heroname?: string;
-    persona?: any;
+    src?: string;
+    volume?: number;
+    muted?: boolean;
+    repeat?: boolean;
+    notreadybehavior?: boolean;
+    loadbehavior?: boolean;
     /** @default 'off' */
     autoplay?: MovieAutoPlay;
+
+    heroid?: HeroID;
+    heroname?: string;
+    persona?: string;
 }
 
 declare interface DOTAScenePanelAttributes extends PanelAttributes<ScenePanel> {
