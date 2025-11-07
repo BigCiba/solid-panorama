@@ -632,8 +632,7 @@ declare interface TabContentsAttributes extends PanelAttributes {
     ondeselect?: EventHandler<Panel>;
 }
 
-declare interface UICanvasAttributes extends PanelAttributes {
-
+declare interface UICanvas extends Panel {
     /**
      * 清空canvas，然后用color覆盖整个Canvas
      * @param color rgba #FFFFFFFF
@@ -650,3 +649,4 @@ declare interface UICanvasAttributes extends PanelAttributes {
      */
     DrawSoftLinePointsJS(point: number, arrPoints: number[], width: number, mode: 0 | 1, color: string): void;
 }
+declare interface UICanvasAttributes extends PanelAttributes<UICanvas> { }
