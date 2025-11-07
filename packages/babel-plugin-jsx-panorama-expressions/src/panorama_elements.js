@@ -48,5 +48,6 @@ export default [
     'DOTAPortrait',
     'TabButton',
     'TabContents',
+    'UICanvas',
     'GenericPanel'
 ];

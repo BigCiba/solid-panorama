@@ -631,3 +631,22 @@ declare interface TabContentsAttributes extends PanelAttributes {
     onselect?: EventHandler<Panel>;
     ondeselect?: EventHandler<Panel>;
 }
+
+declare interface UICanvasAttributes extends PanelAttributes {
+
+    /**
+     * 清空canvas，然后用color覆盖整个Canvas
+     * @param color rgba #FFFFFFFF
+     */
+    ClearJS(color: string): void;
+
+    /**
+     * 画一条折线
+     * @param point 折线一共有几个点
+     * @param arrPoints 折线的坐标，格式为[x1, y1, x2, y2, x3, y3 ...]
+     * @param width 线的宽度
+     * @param mode 1 有抗锯齿
+     * @param color 折线的颜色
+     */
+    DrawSoftLinePointsJS(point: number, arrPoints: number[], width: number, mode: 0 | 1, color: string): void;
+}
